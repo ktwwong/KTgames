@@ -20,7 +20,7 @@ https://www.youtube.com/
 APIs call/input/output
 1. User Login
 You can call this api to check if there have an account. Input the email and password to login.
-
+```
 {
 	url: "http://127.0.0.1:4242/Login",
 	type: "POST",
@@ -34,9 +34,10 @@ You can call this api to check if there have an account. Input the email and pas
 		result = "false"
 	}
 }
+```
 2. User Register
 You can call this api to register an account. Input the email, username and password to create an account.
-
+```
 {
 	url: "http://127.0.0.1:4242/Register",
 	type: "POST",
@@ -53,6 +54,7 @@ You can call this api to register an account. Input the email, username and pass
 		result = "false"
 	}
 }
+```
 3. Show Favourite List
 You can call this api to show the saved content of the account. Load the username to show the favourite item saved in account.
 
@@ -97,7 +99,7 @@ You can call this api to show the saved content of the account. Load the usernam
 }
 4. Add item in Favourite List
 You can call this api to add the item to the account. Pass the username, and likeItem to the server would save the item that user wanted.
-
+```
 {
 	url: "http://127.0.0.1:4242/addfavourlist",
 	type: "POST",
@@ -113,12 +115,14 @@ You can call this api to add the item to the account. Pass the username, and lik
 		return error;
 	}
 }
+```
 The result will have 3 suitation, if can't find the user, it will return error ; Or, if the user have already saved the item before, the system will return fail to told the user they have liked the item before, not needed to like again; Or, if the user have liked it before, also call this api to add the item to server, the system will return the result, which is success case.
 
 5. Remove item in Favourite List
 You can call this api to remove the item to the account. Pass the username, and removeItem to the server would delete the item that user don't wanted.
 
-'{
+```
+{
 	url: "http://127.0.0.1:4242/removefavourlist",
 	type: "POST",
 	data: "username="+username+"&"+"like="+removeItem   
@@ -133,4 +137,4 @@ You can call this api to remove the item to the account. Pass the username, and 
 		return error;
 	}
 }
-'
+```
