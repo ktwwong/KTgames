@@ -5,7 +5,7 @@
 This website is mainly used to promote and introduce different games so that viewers can immediately follow different game information. The website will introduce different game introductions, game reviews, related articles, etc., which will surely meet your different needs.
 
 Overview for the API
----
+===
 
 - USER LOGIN
 - USER REGISTER
@@ -19,9 +19,10 @@ Or, if you want to listen to the aurthor demostration, there come the youtube pr
 https://www.youtube.com/
 
 APIs call/input/output
----
+===
 
-##1\. User Login
+1. User Login
+---
 
 You can call this api to check if there have an account. Input the `email` and `password` to login.
 ```
@@ -40,7 +41,8 @@ You can call this api to check if there have an account. Input the `email` and `
 }
 ```
 
-##2\. User Register
+2. User Register
+---
 
 You can call this api to register an account. Input the `email`, `username` and `password` to create an account.
 ```
@@ -62,7 +64,8 @@ You can call this api to register an account. Input the `email`, `username` and 
 }
 ```
 
-3\. Show Favourite List
+3. Show Favourite List
+---
 
 You can call this api to show the saved content of the account. Load the `username` to show the favourite item saved in account.
 
