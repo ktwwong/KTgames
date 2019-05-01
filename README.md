@@ -14,8 +14,11 @@ Overview for the API
 - REMOVE ITEM IN FAVOURITE LIST
 
 If you want to study the source code of this website, there come the Github full source code link:
+
 https://github.com/ktwwong/KTgames
+
 Or, if you want to listen to the aurthor demostration, there come the youtube presentation link:
+
 https://www.youtube.com/
 
 APIs call/input/output
