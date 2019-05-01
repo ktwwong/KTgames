@@ -19,7 +19,7 @@ https://github.com/ktwwong/KTgames
 
 Or, if you want to listen to the aurthor demostration, there come the youtube presentation link:
 
-https://www.youtube.com/
+https://youtu.be/WBGfqgVyMrw
 
 APIs call/input/output
 ===
