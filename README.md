@@ -17,7 +17,7 @@ If you want to study the source code of this website, there come the Github full
 
 https://github.com/ktwwong/KTgames
 
-Or, if you want to listen to the aurthor demostration, there come the youtube presentation link:
+Or, if you want to listen to the author demonstration, there come the youtube presentation link:
 
 https://youtu.be/WBGfqgVyMrw
 
