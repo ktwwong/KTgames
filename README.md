@@ -69,6 +69,7 @@ You can call this api to register an account. Input the `email`, `username` and 
 
 You can call this api to show the saved content of the account. Load the `username` to show the favourite item saved in account.
 
+```
 {
 	url: "http://127.0.0.1:4242/Favourlist",
 	type: "POST",
@@ -108,6 +109,7 @@ You can call this api to show the saved content of the account. Load the `userna
 		return error;
 	}
 }
+```
 
 4\. Add item in Favourite List
 ---
