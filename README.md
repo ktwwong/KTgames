@@ -5,12 +5,13 @@
 This website is mainly used to promote and introduce different games so that viewers can immediately follow different game information. The website will introduce different game introductions, game reviews, related articles, etc., which will surely meet your different needs.
 
 Overview for the API
+---
 
-1. USER LOGIN
-2. USER REGISTER
-3. SHOW FAVOURITE LIST
-4. ADD ITEM IN FAVOURITE LIST
-5. REMOVE ITEM IN FAVOURITE LIST
+- 1. USER LOGIN
+- 2. USER REGISTER
+- 3. SHOW FAVOURITE LIST
+- 4. ADD ITEM IN FAVOURITE LIST
+- 5. REMOVE ITEM IN FAVOURITE LIST
 
 If you want to study the source code of this website, there come the Github full source code link:
 https://github.com/ktwwong/KTgames
@@ -18,8 +19,11 @@ Or, if you want to listen to the aurthor demostration, there come the youtube pr
 https://www.youtube.com/
 
 APIs call/input/output
-1. User Login
-You can call this api to check if there have an account. Input the email and password to login.
+---
+
+##1. User Login
+
+You can call this api to check if there have an account. Input the `email` and `password` to login.
 ```
 {
 	url: "http://127.0.0.1:4242/Login",
@@ -35,8 +39,9 @@ You can call this api to check if there have an account. Input the email and pas
 	}
 }
 ```
-2. User Register
-You can call this api to register an account. Input the email, username and password to create an account.
+##2. User Register
+
+You can call this api to register an account. Input the `email`, `username` and `password` to create an account.
 ```
 {
 	url: "http://127.0.0.1:4242/Register",
@@ -56,7 +61,8 @@ You can call this api to register an account. Input the email, username and pass
 }
 ```
 3. Show Favourite List
-You can call this api to show the saved content of the account. Load the username to show the favourite item saved in account.
+
+You can call this api to show the saved content of the account. Load the `username` to show the favourite item saved in account.
 
 {
 	url: "http://127.0.0.1:4242/Favourlist",
@@ -98,7 +104,8 @@ You can call this api to show the saved content of the account. Load the usernam
 	}
 }
 4. Add item in Favourite List
-You can call this api to add the item to the account. Pass the username, and likeItem to the server would save the item that user wanted.
+
+You can call this api to add the item to the account. Pass the `username`, and `likeItem` to the server would save the item that user wanted.
 ```
 {
 	url: "http://127.0.0.1:4242/addfavourlist",
@@ -116,10 +123,11 @@ You can call this api to add the item to the account. Pass the username, and lik
 	}
 }
 ```
-The result will have 3 suitation, if can't find the user, it will return error ; Or, if the user have already saved the item before, the system will return fail to told the user they have liked the item before, not needed to like again; Or, if the user have liked it before, also call this api to add the item to server, the system will return the result, which is success case.
+The result will have 3 suitation, if can't find the user, it will return `error` ; Or, if the user have already saved the item before, the system will return `fail` to told the user they have liked the item before, not needed to like again; Or, if the user have liked it before, also call this api to add the item to server, the system will return the result, which is `success` case.
 
 5. Remove item in Favourite List
-You can call this api to remove the item to the account. Pass the username, and removeItem to the server would delete the item that user don't wanted.
+
+You can call this api to remove the item to the account. Pass the `username`, and `removeItem` to the server would delete the item that user don't wanted.
 
 ```
 {
