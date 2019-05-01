@@ -135,7 +135,7 @@ You can call this api to add the item to the account. Pass the `username`, and `
 	}
 }
 ```
-The result will have 3 suitation, if can't find the user, it will return `error` ; Or, if the user have already saved the item before, the system will return `fail` to told the user they have liked the item before, not needed to like again; Or, if the user have liked it before, also call this api to add the item to server, the system will return the result, which is `success` case.
+The result will have 3 situation, if can't find the user, it will return `error` ; Or, if the user have already saved the item before, the system will return `fail` to told the user they have liked the item before, not needed to like again; Or, if the user have liked it before, also call this api to add the item to server, the system will return the result, which is `success` case.
 
 5\. Remove item in Favourite List
 ---
