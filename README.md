@@ -7,11 +7,11 @@ This website is mainly used to promote and introduce different games so that vie
 Overview for the API
 ---
 
-- 1. USER LOGIN
-- 2. USER REGISTER
-- 3. SHOW FAVOURITE LIST
-- 4. ADD ITEM IN FAVOURITE LIST
-- 5. REMOVE ITEM IN FAVOURITE LIST
+- USER LOGIN
+- USER REGISTER
+- SHOW FAVOURITE LIST
+- ADD ITEM IN FAVOURITE LIST
+- REMOVE ITEM IN FAVOURITE LIST
 
 If you want to study the source code of this website, there come the Github full source code link:
 https://github.com/ktwwong/KTgames
@@ -21,7 +21,7 @@ https://www.youtube.com/
 APIs call/input/output
 ---
 
-##1. User Login
+##1\. User Login
 
 You can call this api to check if there have an account. Input the `email` and `password` to login.
 ```
@@ -39,7 +39,8 @@ You can call this api to check if there have an account. Input the `email` and `
 	}
 }
 ```
-##2. User Register
+
+##2\. User Register
 
 You can call this api to register an account. Input the `email`, `username` and `password` to create an account.
 ```
@@ -60,7 +61,8 @@ You can call this api to register an account. Input the `email`, `username` and 
 	}
 }
 ```
-3. Show Favourite List
+
+3\. Show Favourite List
 
 You can call this api to show the saved content of the account. Load the `username` to show the favourite item saved in account.
 
@@ -103,7 +105,8 @@ You can call this api to show the saved content of the account. Load the `userna
 		return error;
 	}
 }
-4. Add item in Favourite List
+
+##4\. Add item in Favourite List
 
 You can call this api to add the item to the account. Pass the `username`, and `likeItem` to the server would save the item that user wanted.
 ```
@@ -125,7 +128,7 @@ You can call this api to add the item to the account. Pass the `username`, and `
 ```
 The result will have 3 suitation, if can't find the user, it will return `error` ; Or, if the user have already saved the item before, the system will return `fail` to told the user they have liked the item before, not needed to like again; Or, if the user have liked it before, also call this api to add the item to server, the system will return the result, which is `success` case.
 
-5. Remove item in Favourite List
+##5\. Remove item in Favourite List
 
 You can call this api to remove the item to the account. Pass the `username`, and `removeItem` to the server would delete the item that user don't wanted.
 
