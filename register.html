@@ -64,11 +64,17 @@ $(document).ready(function(){
 				type: 'POST',
 				data: "email="+tempEmail+"&"+"username="+tempName+"&"+"password="+tempPassword,
 				success: function(result){
-					alert("Registration success");
-					alert("Thanks for creating an account, your email is: " + tempEmail + " and username is: " + tempName + ". Enjoy!");
-					window.location.href = "/Login";
-					}, error: function (xhr, textStatus, errorThrown) {
-						alert("Registration failed, please try again with other username");
+					if (result == "fail"){
+						console.log("user exist");
+						alert("The username have been used, please try an other name.");
+					}
+					else{
+						console.log("success");
+						alert("Registration success");
+						alert("Thanks for creating an account, your email is: " + tempEmail + " and username is: " + tempName + ". Enjoy!");
+						window.location.href = "/Login";
+					}}, error: function (xhr, textStatus, errorThrown) {
+						alert("Oops, something goes wrong, please contact with the web master.");
 						console.log(textStatus);
 					}
 			});
@@ -211,7 +217,7 @@ $(document).ready(function(){
 						<input type="password" class="form-control" name="repassword" placeholder="Re-enter Password*">
 					</div>
 					<div class="col-12" align="center">
-						<button id="btnRegister" class="btn egames-btn w-50">Register</button>
+						<input id="btnRegister" class="btn egames-btn w-50" value='Register!' type='button'>
 					</div>
 				</div>
 			</form>

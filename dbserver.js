@@ -21,76 +21,22 @@ var dbUrl = "mongodb://localhost:27017/";
 		
 		if (action === "/Main") {
 			console.log("main");
-			if (req.method === "POST") {
-				console.log("action = post");
-				formData = '';
-				msg = '';
-				return req.on('data', function(data) {
-					formData += data;
-					console.log("form data="+ formData);
-					return req.on('end', function() {
-						var user;
-						user = qs.parse(formData);
-						user.id = "0";
-						msg = JSON.stringify(user);
-						stringMsg = JSON.parse(msg);
-						var splitMsg = formData.split("&");
-						var tempSplitEmail = splitMsg[0];
-						var tempSplitPassword = splitMsg[1];
-						var splitEmail = tempSplitEmail.split("=");
-						var splitPassword = tempSplitPassword.split("=");
-						var searchDB = "Email : " + splitEmail[1] + " " + "Password : " + splitPassword[1];
-						console.log("mess="+msg);
-						console.log("mess="+formData);
-						console.log("search=" + searchDB);
-						
-						MongoClient.connect(dbUrl, function(err, db) {
-							var username;
-							if (err) throw err;
-							var dbo = db.db("database");
-							var myobj = splitMsg;
-							dbo.collection("user").findOne({"email" : splitEmail[1], "password" : splitPassword[1]}, function(err, result){
-								console.log("Error: ",err, "Result: ", result);
-								//finalcount = count;
-								if(result == null)
-								{
-									console.log("user missing");
-									db.close();
-									return res.end("fail");
-								}
-								else
-								{
-									console.log("OK");
-									username = result.username;
-									console.log(username);
-									db.close();
-									//return res.end(msg);
-									return res.end(username);
-								}
-							});
-						});
+			//form = publicPath + "ajaxSignupForm.html";
+			form = "index.html";
+			return fs.readFile(form, function(err, contents) {
+				if (err !== true)
+				{
+					res.writeHead(200, {
+						"Content-Type": "text/html"
 					});
-				});
-			}
-			else 
-			{
-				//form = publicPath + "ajaxSignupForm.html";
-				form = "index.html";
-				return fs.readFile(form, function(err, contents) {
-					if (err !== true)
-					{
-						res.writeHead(200, {
-							"Content-Type": "text/html"
-						});
-						return res.end(contents);
-					}
-					else 
-					{
-						res.writeHead(500);
-						return res.end;
-					}
-				});
-			}
+					return res.end(contents);
+				}
+				else 
+				{
+					res.writeHead(500);
+					return res.end;
+				}
+			});
 		}
 		
 		else if (action === "/Login"){
@@ -193,22 +139,18 @@ var dbUrl = "mongodb://localhost:27017/";
 						console.log("mess= "+formData);
 						//console.log("split=" + msg[1]);
 						console.log("search= " + searchDB);
-						res.writeHead(200, {
-							"Content-Type": "application/json",
-							"Content-Length": msg.length
-						});
+						
 						MongoClient.connect(dbUrl, function(err, db) {
 							var finalcount;
 							if (err) throw err;
 							var dbo = db.db("database");
 							var myobj = stringMsg;
-							console.log(user);
-							dbo.collection("user").count({"email" : splitEmail[1]}, function(err, count){
+							dbo.collection("user").count({"email": splitEmail[1], "username" : splitName[1]}, function(err, count){
 								console.log(err, count);
 								finalcount = count;
 								if(finalcount > 0)
 								{
-									if(err) throw err;
+									if (err) throw err;
 									console.log("user exist");
 									db.close();
 									return res.end("fail");
@@ -221,7 +163,7 @@ var dbUrl = "mongodb://localhost:27017/";
 										db.close();
 										//return res.end(msg);
 									});
-									return res.end(msg);
+									return res.end("OK");
 								}
 							});
 						});
