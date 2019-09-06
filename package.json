@@ -4,16 +4,19 @@
   "description": "ktgames app ",
   "main": "dbserver.js",
   "scripts": {
-	"start": "node dbserver"
-},
+    "start": "node dbserver"
+  },
   "repository": {
-  "type": "git",
-  "url": ""
-},
+    "type": "git",
+    "url": ""
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
-  "url": ""
-},
-  "homepage": "index.html"
+    "url": ""
+  },
+  "homepage": "index.html",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
