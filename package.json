@@ -4,7 +4,7 @@
   "description": "ktgames app ",
   "main": "dbserver.js",
   "scripts": {
-    "start": "node dbserver"
+    "start": "node dbserver.js"
   },
   "repository": {
     "type": "git",
