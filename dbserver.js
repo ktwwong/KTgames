@@ -601,7 +601,7 @@ var port = process.env.PORT || 4242;
 
 	server.listen(port);
 
-	console.log("Server is running，time is" + new Date());
+	console.log("Server " + port + " is running, the time is " + new Date());
 
 
 	function sendFileContent(response, fileName, contentType){
