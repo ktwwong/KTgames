@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var dbUrl = "mongodb://localhost:27017/";
+var port = process.env.PORT || 4242;
 
 (function() {
 	var fs, http, qs, server, url;
@@ -598,7 +599,7 @@ var dbUrl = "mongodb://localhost:27017/";
 		}
 	});
 
-	server.listen(4242);
+	server.listen(port);
 
 	console.log("Server is running，time is" + new Date());
 
