@@ -27,51 +27,53 @@ function executeFunctionByName(functionName, context /*, args */ ) {
     return context[func].apply(context, args);
 }
 
-var route = [
-    "Main" => [
-        "", 
-        "index.html"
-    ],
-    "Login" => [
-        "findOne",
-        "login.html"
-    ],
-    "Register" => [
-        "insertOne",
-        "register.html"
-    ],
-    "Favourlist" => [
-        "find",
-        "love.html"
-    ],
-    "addfavourlist" => [
-        "count",
-        "Main.html"
-    ],
-    "removefavourlist" => [
-        "deleteOne",
-        "contact.html"
-    ],
-    "gameReview" => [
-        "",
-        "game-review.html"
-    ],
-    "review" => [
-        "",
-        "single-game-review.html"
-    ],
-    "post" => [
-        "",
-        "post.html"
-    ],
-    "API" => [
-        "",
-        "apiCall.html"
-    ],
-];
-
+var route = {
+    "Main" : {
+        method: "", 
+        html: "index.html"
+    },
+    "Login" : {
+        method: "findOne",
+        html: "login.html"
+    },
+    "Register" : {
+        method: "insertOne",
+        html: "register.html"
+    },
+    "Favourlist" : {
+        method: "find",
+        html: "love.html"
+    },
+    "addfavourlist" : {
+        method: "count",
+        html: "Main.html"
+    },
+    "removefavourlist" : {
+        method: "deleteOne",
+        html: "contact.html"
+    },
+    "gameReview" : {
+        method: "",
+        html: "game-review.html"
+    },
+    "review" : {
+        method: "",
+        html: "single-game-review.html"
+    },
+    "post" : {
+        method: "",
+        html: "post.html"
+    },
+    "API" : {
+        method: "",
+        html: "apiCall.html"
+    },
+};
+``
 function Route(route, method, html, req, res){
-    if (method == "findOne" || method == "insertOne"){
+    var searchDB;
+    if (method == "findOne" || method == "insertOne" || 
+    method == "find" || method == "count" || method == "deleteOne"){
         console.log(method);
         formData = "";
         msg = "";
@@ -86,13 +88,13 @@ function Route(route, method, html, req, res){
                 var splitMsg = formData.split("&");
                 for(let i=0; i<splitMsg.length; i++){
                     splitMsg[i] = splitMsg[i].split("=");
-                    var searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + " ";
+                    searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + " ";
                 }
                 console.log(searchDB);
 
                 dbConnect(method, splitMsg);
-            })
-        })
+            });
+        });
     }
     else {
         console.log(route);
@@ -227,7 +229,7 @@ function dbConnect(method, splitMsg){
                 if (err) throw err;
                 var myobj = {
                     for (let i = 0; i < splitMsg.length; i++) {
-                        splitMsg[i][0] : splitMsg[i][1]
+                        var array = splitMsg[i][0] : splitMsg[i][1];
                     }
                 };
                 console.log(user);
@@ -267,6 +269,7 @@ function dbConnect(method, splitMsg){
                     return res.end;
                 }
             });
+        }
         else {
             //handle redirect
             if (req.url){
