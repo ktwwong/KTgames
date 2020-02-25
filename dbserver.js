@@ -1,18 +1,18 @@
 var tools = require("./toolsLibrary");
 var http = require("http");
 var url = require("url");
-var qs = require("querystring");
 var fs = require("fs");
-var regex = require("./regularExpression.js");
+var regex = require("./regularExpression");
 
 var loginStatus = false;
 var loginUser = "";
 
-var server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
-});
+// #### Test server #####
+// var server = http.createServer((req, res) => {
+//     res.statusCode = 200;
+//     res.setHeader('Content-Type', 'text/plain');
+//     res.end('Hello World');
+// });
 
 var route = {
     "Main" : {

@@ -5,7 +5,6 @@
 
 var MongoClient = require("mongodb").MongoClient;
 var dbUrl = "mongodb://localhost:27017/";
-var port = process.env.PORT || 4242;
 var qs = require("querystring");
 var fs = require("fs");
 
