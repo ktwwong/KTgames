@@ -69,32 +69,32 @@ var route = {
         html: "apiCall.html"
     },
 };
-``
-function Route(route, method, html, req, res){
-    var searchDB;
-    if (method == "findOne" || method == "insertOne" || 
-    method == "find" || method == "count" || method == "deleteOne"){
-        console.log(method);
-        formData = "";
-        msg = "";
-        return req.on("data", function (data){
-            formData += data;
-            console.log("form data = " + formData);
-            return req.on("end", function(){
-                var user = qs.parse(formData);
-                user.id = "0";
-                msg = JSON.stringify(user);
-                stringMsg = JSON.parse(msg);
-                var splitMsg = formData.split("&");
-                for(let i=0; i<splitMsg.length; i++){
-                    splitMsg[i] = splitMsg[i].split("=");
-                    searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + " ";
-                }
-                console.log(searchDB);
 
-                dbConnect(method, splitMsg);
+function callRoute(method, html, req, res){
+    var searchDB;
+    if (req.method === "POST"){
+            console.log(method);
+            formData = "";
+            msg = "";
+            return req.on("data", function (data){
+                formData += data;
+                console.log("form data = " + formData);
+                return req.on("end", function(){
+                    var user = qs.parse(formData);
+                    user.id = "0";
+                    msg = JSON.stringify(user);
+                    stringMsg = JSON.parse(msg);
+                    var splitMsg = formData.split("&");
+                    for(let i=0; i<splitMsg.length; i++){
+                        splitMsg[i] = splitMsg[i].split("=");
+                        searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + " ";
+                    }
+                    console.log(searchDB);
+
+                    dbConnect(method, splitMsg);
+                });
             });
-        });
+        }
     }
     else {
         console.log(route);
@@ -119,13 +119,13 @@ function dbConnect(method, splitMsg){
             MongoClient.connect(dbUrl, function (err, db) {
                 var username;
                 if (err) throw err;
-                var myobj = splitMsg;
+                var email = splitMsg[0][1];
+                var password = splitMsg[1][1];
                 dbo.collection("user").findOne({
-                    for (let i = 0; i < splitMsg.length; i++) {
-                        splitMsg[i][0] : splitMsg[i][1]
-                    }
+                    "email" : email,
+                    "password": password
                 }, function(err, result) {
-                    console.log("Error: ", err, "Result: ", result);
+                    console.log("Error: ", err, ", Result: ", result);
                     if (result == null){
                         console.log("user missing");
                         db.close();
@@ -140,6 +140,7 @@ function dbConnect(method, splitMsg){
                 });
             });
             break;
+
         case "insertOne":
             MongoClient.connect(dbUrl, function (err, db) {
                 var finalcount;
@@ -245,7 +246,7 @@ function dbConnect(method, splitMsg){
     }
 }
 
-(function () {
+function createServer() {
     var server = http.createServer(function (req, res) {
         var action, form, formData, msg, publicPath, urlData, stringMsg;
         urlData = url.parse(req.url, true);
@@ -254,7 +255,9 @@ function dbConnect(method, splitMsg){
         console.log(req.url);
 
         if (action){
-            executeFunctionByName(action.split("/")[1], req, res);
+            // executeFunctionByName(action.split("/")[1], req, res);
+            var method = action.toString().substring(1);
+            this.callRoute(method, route[method].html, req, res)
         }
         else if (action === "/Sony%E2%80%99s+new+releases+for+2018") {
             form = "single-post.html";
@@ -299,19 +302,9 @@ function dbConnect(method, splitMsg){
                 }
             }
             else if (/^\/[a-zA-Z0-9\/-/]*.js$/.test(req.url.toString())) {
-                sendFileContent(
-                    res,
-                    req.url.toString().substring(1),
-                    "text/javascript"
-                );
-            } else if (
-                /^\/[a-zA-Z0-9\/-/]*.bundle.min.js$/.test(req.url.toString())
-            ) {
-                sendFileContent(
-                    res,
-                    req.url.toString().substring(1),
-                    "text/javascript"
-                );
+                sendFileContent(res,req.url.toString().substring(1),"text/javascript");
+            } else if (/^\/[a-zA-Z0-9\/-/]*.bundle.min.js$/.test(req.url.toString())) {
+                sendFileContent(res,req.url.toString().substring(1),"text/javascript");
             } else if (/^\/[a-zA-Z0-9\/-/]*.css$/.test(req.url.toString())) {
                 sendFileContent(res, req.url.toString().substring(1), "text/css");
             } else if (/^\/[a-zA-Z0-9\/-]*.min.css$/.test(req.url.toString())) {
@@ -346,7 +339,7 @@ function dbConnect(method, splitMsg){
     server.listen(port, () => {
         console.log("Server " + port + " is running, the time is " + new Date());
     });
-}.call(this));
+}
 
 function sendFileContent(response, fileName, contentType) {
     fs.readFile(fileName, function (err, data) {
@@ -362,3 +355,5 @@ function sendFileContent(response, fileName, contentType) {
         response.end();
     });
 }
+
+createServer.call();
