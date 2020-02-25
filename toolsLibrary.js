@@ -27,9 +27,6 @@ module.exports = {
     callRoute: function (method, route, req, res){
         var searchDB;
         console.log(route);
-        if (route){
-            var html = route.html;
-        }
         if (req.method === "POST"){
             console.log(method);
             formData = "";
@@ -54,7 +51,7 @@ module.exports = {
             });
         }
         else {
-            return fs.readFile(html, function (err, contents) {
+            return fs.readFile(route.html, function (err, contents) {
                 if (err != true) {
                     res.writeHead(200, {
                         "Content-Type": "text/html"

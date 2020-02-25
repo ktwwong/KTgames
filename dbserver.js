@@ -69,9 +69,9 @@ function createServer() {
         publicPath = __dirname + "\\public\\";
         console.log(req.url);
 
-        if (action){
+        var method = action.toString().substring(1);
+        if (route[method]){
             // executeFunctionByName(action.split("/")[1], req, res);
-            var method = action.toString().substring(1);
             console.log(method);
             tools.callRoute(method, route[method], req, res);
         }
