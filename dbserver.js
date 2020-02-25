@@ -3,7 +3,7 @@ var http = require("http");
 var url = require("url");
 var qs = require("querystring");
 var fs = require("fs");
-var regex = require("./regularExpression");
+var regex = require("./regularExpression.js");
 
 var loginStatus = false;
 var loginUser = "";
@@ -32,7 +32,7 @@ var route = {
         html: "love.html"
     },
     "addfavourlist" : {
-        method: "count",
+        method: "like",
         html: "Main.html"
     },
     "removefavourlist" : {

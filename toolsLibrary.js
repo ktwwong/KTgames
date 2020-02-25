@@ -28,28 +28,27 @@ function executeFunctionByName(functionName, context /*, args */ ) {
 function callRoute(method, html, req, res){
     var searchDB;
     if (req.method === "POST"){
-            console.log(method);
-            formData = "";
-            msg = "";
-            return req.on("data", function (data){
-                formData += data;
-                console.log("form data = " + formData);
-                return req.on("end", function(){
-                    var user = qs.parse(formData);
-                    user.id = "0";
-                    msg = JSON.stringify(user);
-                    stringMsg = JSON.parse(msg);
-                    var splitMsg = formData.split("&");
-                    for(let i=0; i<splitMsg.length; i++){
-                        splitMsg[i] = splitMsg[i].split("=");
-                        searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + ", ";
-                    }
-                    console.log(searchDB);
+        console.log(method);
+        formData = "";
+        msg = "";
+        return req.on("data", function (data){
+            formData += data;
+            console.log("form data = " + formData);
+            return req.on("end", function(){
+                var user = qs.parse(formData);
+                user.id = "0";
+                msg = JSON.stringify(user);
+                stringMsg = JSON.parse(msg);
+                var splitMsg = formData.split("&");
+                for(let i=0; i<splitMsg.length; i++){
+                    splitMsg[i] = splitMsg[i].split("=");
+                    searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + ", ";
+                }
+                console.log(searchDB);
 
-                    this.dbConnect(method, splitMsg);
-                });
+                this.dbConnect(method, splitMsg);
             });
-        }
+        });
     }
     else {
         return fs.readFile(html, function (err, contents) {
@@ -73,11 +72,9 @@ function dbConnect(method, splitMsg){
             MongoClient.connect(dbUrl, function (err, db) {
                 var username;
                 if (err) throw err;
-                var email = splitMsg[0][1];
-                var password = splitMsg[1][1];
                 dbo.collection("user").findOne({
-                    "email" : email,
-                    "password": password
+                    "email" : splitMsg[0][1],
+                    "password": splitMsg[1][1]
                 }, function(err, result) {
                     console.log("Error: ", err, ", Result: ", result);
                     if (result == null){
@@ -99,11 +96,9 @@ function dbConnect(method, splitMsg){
             MongoClient.connect(dbUrl, function (err, db) {
                 var finalcount;
                 if (err) throw err;
-                var myobj = splitMsg;
                 dbo.collection("user").count({
-                    for (let i = 0; i < splitMsg.length; i++) {
-                        splitMsg[i][0] : splitMsg[i][1]
-                    }
+                    "email": splitMsg[0][1],
+                    "username": splitMsg[1][1]
                 }, function (err, count) {
                     console.log(err, count);
                     finalcount = count;
@@ -131,9 +126,7 @@ function dbConnect(method, splitMsg){
                 if (err) throw err;
                 var myobj = splitMsg;
                 dbo.collection("favourite").find({
-                    for (let i = 0; i < splitMsg.length; i++) {
-                        splitMsg[i][0] : splitMsg[i][1]
-                    }
+                    "username" : splitMsg[0][1]
                 }).toArray(function (err, result) {
                     if (err) {
                         throw err;
@@ -152,15 +145,14 @@ function dbConnect(method, splitMsg){
             });
         break;
         
-        case "count":
+        case "like":
             MongoClient.connect(dbUrl, function (err, db) {
                 var finalcount;
                 if (err) throw err;
                 var myobj = stringMsg;
                 dbo.collection("favourite").count({
-                    for (let i = 0; i < splitMsg.length; i++) {
-                        splitMsg[i][0] : splitMsg[i][1]
-                    }
+                    "username" : splitMsg[0][1],
+                    "like": splitMsg[1][1]
                 }, function (err, count) {
                         console.log(err, count);
                         finalcount = count;
@@ -170,13 +162,13 @@ function dbConnect(method, splitMsg){
                             db.close();
                             return res.end("fail");
                         } else {
-                            dbo.collection("favourite").insertOne(myobj, function (err, res) {
+                            dbo.collection("favourite").insertOne(myobj, function (err, result) {
                                     if (err) throw err;
                                     console.log("favourite list inserted");
                                     db.close();
-                                    //return res.end(msg);
+                                    return res.end(result);
                                 });
-                            return res.end(msg);
+                            // return res.end(err);
                         }
                 });
             });
@@ -186,16 +178,15 @@ function dbConnect(method, splitMsg){
             MongoClient.connect(dbUrl, function (err, db) {
                 if (err) throw err;
                 var myobj = {
-                    for (let i = 0; i < splitMsg.length; i++) {
-                        var array = splitMsg[i][0] : splitMsg[i][1];
-                    }
+                    "username" : splitMsg[0][1],
+                    "like": splitMsg[1][1]
                 };
                 console.log(user);
                 dbo.collection("favourite").deleteOne(myobj, function (err, result) {
                     if (err) throw err;
                     console.log("1 document deleted");
                     db.close();
-                    return res.end(msg);
+                    return res.end(result);
                 });
             });
         break;
