@@ -13,6 +13,7 @@ var dbo = db.db("database");
 
 // execute a JavaScript function by its name
 // Reference from: https://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
+// call method: executeFunctionByName("My.Namespace.functionName", window, arguments);
 function executeFunctionByName(functionName, context /*, args */ ) {
     var args = Array.prototype.slice.call(arguments, 2);
     var namespaces = functionName.split(".");
