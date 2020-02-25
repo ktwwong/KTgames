@@ -26,7 +26,7 @@ function executeFunctionByName(functionName, context /*, args */ ) {
 
 // call different page or return data by post
 function callRoute(method, html, req, res){
-    var searchDB, form;
+    var searchDB;
     if (req.method === "POST"){
             console.log(method);
             formData = "";
@@ -52,9 +52,7 @@ function callRoute(method, html, req, res){
         }
     }
     else {
-        console.log(html);
-        form = html;
-        return fs.readFile(form, function (err, contents) {
+        return fs.readFile(html, function (err, contents) {
             if (err != true) {
                 res.writeHead(200, {
                     "Content-Type": "text/html"

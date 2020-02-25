@@ -21,6 +21,10 @@ Or, if you want to listen to the author demonstration, there come the youtube pr
 
 https://youtu.be/WBGfqgVyMrw
 
+Last, there is the preview of the website:
+
+https://ktwwong.github.io/KTgames/
+
 APIs call/input/output
 ===
 
