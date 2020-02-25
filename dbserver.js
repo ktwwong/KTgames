@@ -87,7 +87,7 @@ function callRoute(method, html, req, res){
                     var splitMsg = formData.split("&");
                     for(let i=0; i<splitMsg.length; i++){
                         splitMsg[i] = splitMsg[i].split("=");
-                        searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + " ";
+                        searchDB += splitMsg[i][0] + " : " + splitMsg[i][1] + ", ";
                     }
                     console.log(searchDB);
 
