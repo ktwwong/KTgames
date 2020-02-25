@@ -1,11 +1,15 @@
+// import file
 var tools = require("./toolsLibrary");
+var regex = require("./regularExpression");
+
 var http = require("http");
 var url = require("url");
 var fs = require("fs");
-var regex = require("./regularExpression");
+
+// var dbUrl = "mongodb://localhost:27017/";
+var port = process.env.PORT || 4242;
 
 var loginStatus = false;
-var loginUser = "";
 
 // #### Test server #####
 // var server = http.createServer((req, res) => {
@@ -68,7 +72,8 @@ function createServer() {
         if (action){
             // executeFunctionByName(action.split("/")[1], req, res);
             var method = action.toString().substring(1);
-            tools.callRoute(method, route[method].html, req, res)
+            console.log(method);
+            tools.callRoute(method, route[method], req, res);
         }
         else if (action === "/Sony%E2%80%99s+new+releases+for+2018") {
             form = "single-post.html";
