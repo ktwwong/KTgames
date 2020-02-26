@@ -2,7 +2,7 @@
  * About the regular Expression, you can read more about it at:
  * https://atedev.wordpress.com/2007/11/23/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-regular-expression/
  * This is a good practice that learn how to avoid the target character you need, 
- * instead of putting every word into you regular expression test,
+ * instead of put every word into you regular expression test,
  * beside it will easily getting bugs.
  */
 
