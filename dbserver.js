@@ -72,7 +72,7 @@ function createServer() {
         var method = action.toString().substring(1);
         if (route[method]){
             // executeFunctionByName(action.split("/")[1], req, res);
-            console.log(method);
+            console.log("method: "+method);
             tools.callRoute(method, route[method], req, res);
         }
         else if (action === "/Sony%E2%80%99s+new+releases+for+2018") {
@@ -116,8 +116,8 @@ function createServer() {
                 else {
                     sendFileContent(res, html, "text/html");
                 }
-            } else {
                 regularExpression(res, req.url.toString());
+            } else {
                 console.log("Requested URL is: " + req.url);
                 res.end();
             }
@@ -131,8 +131,8 @@ function createServer() {
 
 function regularExpression(res, url){
     for(let i=0; i<regex.array.length; i++){
-        if (regex1.array[i][0].test(url)){
-            sendFileContent(res, url.substring(1), regex1.array[i][0]);
+        if (regex.array[i][0].test(url)){
+            sendFileContent(res, url.substring(1), regex.array[i][0]);
         }
     }
 }
