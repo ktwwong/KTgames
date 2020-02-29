@@ -113,10 +113,41 @@ function createServer() {
                     });
                     res.write("<b>testpage</b><br /><br />This is the default response.");
                 }
+                else if(/^\/[a-zA-Z0-9\/-/]*.jpg$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "image/jpg");
+                }
+                else if(/^\/[a-zA-Z0-9\/-/]*.js$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/javascript");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.bundle.min.js$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/javascript");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.css$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/css");
+                }else if(/^\/[a-zA-Z0-9\/-]*.min.css$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/css");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.jpg$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "image/jpg");
+                }else if(/^\/[a-zA-Z0-9-._\/]*.min.js$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/javascript");
+                }else if(/^\/[a-zA-Z0-9-]*.min.css.map$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/map");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.min.js.map$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/map");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.css.map$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/map");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.png$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "image/png");
+                }else if(/^\/[a-zA-Z0-9\/-/]*.ico$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/ico");
+                }else if(/^\/[a-zA-Z0-9\/-/?]*.ttf$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/font");
+                }else if(/^\/[a-zA-Z0-9\/-/?]*.woff$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/woff");
+                }else if(/^\/[a-zA-Z0-9\/-/?]*.woff2$/.test(req.url.toString())){
+                    sendFileContent(res, req.url.toString().substring(1), "text/woff2");
+                }
                 else {
                     sendFileContent(res, html, "text/html");
                 }
-                regularExpression(res, req.url.toString());
             } else {
                 console.log("Requested URL is: " + req.url);
                 res.end();
@@ -127,14 +158,6 @@ function createServer() {
     server.listen(port, () => {
         console.log("Server " + port + " is running, the time is " + new Date());
     });
-}
-
-function regularExpression(res, url){
-    for(let i=0; i<regex.array.length; i++){
-        if (regex.array[i][0].test(url)){
-            sendFileContent(res, url.substring(1), regex.array[i][0]);
-        }
-    }
 }
 
 function sendFileContent(response, fileName, contentType) {
