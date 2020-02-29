@@ -91,64 +91,49 @@ function createServer() {
         }
         else {
             //handle redirect
-            if (req.url){
-                var html = req.url.split("/")[1] + ".html"
-
-                if (req.url === "/index") {
-                    if (loginStatus) {
-                        sendFileContent(res, "loginindex.html", "text/html");
-                    } else {
-                        sendFileContent(res, "finalindex.html", "text/html");
-                    }
-                }
-                else if (req.url === "/logout") {
-                    loginStatus = false;
-                    loginUser = "";
+            if (req.url === "/index") {
+                if (loginStatus) {
+                    sendFileContent(res, "loginindex.html", "text/html");
+                } else {
                     sendFileContent(res, "finalindex.html", "text/html");
                 }
-                else if (req.url === "/") {
-                    console.log("Requested URL is url" + req.url);
-                    res.writeHead(200, {
-                        "Content-Type": "text/html"
-                    });
-                    res.write("<b>testpage</b><br /><br />This is the default response.");
-                }
-                else if(/^\/[a-zA-Z0-9\/-/]*.jpg$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "image/jpg");
-                }
-                else if(/^\/[a-zA-Z0-9\/-/]*.js$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/javascript");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.bundle.min.js$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/javascript");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.css$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/css");
-                }else if(/^\/[a-zA-Z0-9\/-]*.min.css$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/css");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.jpg$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "image/jpg");
-                }else if(/^\/[a-zA-Z0-9-._\/]*.min.js$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/javascript");
-                }else if(/^\/[a-zA-Z0-9-]*.min.css.map$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/map");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.min.js.map$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/map");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.css.map$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/map");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.png$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "image/png");
-                }else if(/^\/[a-zA-Z0-9\/-/]*.ico$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/ico");
-                }else if(/^\/[a-zA-Z0-9\/-/?]*.ttf$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/font");
-                }else if(/^\/[a-zA-Z0-9\/-/?]*.woff$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/woff");
-                }else if(/^\/[a-zA-Z0-9\/-/?]*.woff2$/.test(req.url.toString())){
-                    sendFileContent(res, req.url.toString().substring(1), "text/woff2");
-                }
-                else {
-                    sendFileContent(res, html, "text/html");
-                }
-            } else {
+            }
+            else if (req.url === "/logout") {
+                loginStatus = false;
+                loginUser = "";
+                sendFileContent(res, "finalindex.html", "text/html");
+            }
+            else if (req.url === "/") {
+                console.log("Requested URL is url" + req.url);
+                res.writeHead(200, {
+                    "Content-Type": "text/html"
+                });
+                res.write("<b>testpage</b><br /><br />This is the default response.");
+            }
+            // font is loading extremely low, direct call to avoid time-out
+            // else if(/^\/[a-zA-Z0-9\/\-\.]*.tff$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/font");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.woff$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/woff");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.woff2$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/woff2");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.map$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/map");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.css$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/css");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.js$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/javascript");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.ico$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "text/ico");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.png$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "image/png");
+			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.jpg$/.test(req.url)){
+			// 	sendFileContent(res, req.url.substring(1), "image/jpg");
+            // }
+            else if(regex.check(req.url) != null){
+                regularCheck(regex[regex.check(req.url)], res, req.url);
+            }
+            else {
                 console.log("Requested URL is: " + req.url);
                 res.end();
             }
@@ -158,6 +143,16 @@ function createServer() {
     server.listen(port, () => {
         console.log("Server " + port + " is running, the time is " + new Date());
     });
+}
+
+function regularCheck(regex, res, url) {
+    if ((regex.regEx).test(url)){
+        sendFileContent(res, url.substring(1), regex.fileType);
+    }
+    else {
+        console.log("Fail to load: " + url);
+        res.end();
+    }
 }
 
 function sendFileContent(response, fileName, contentType) {

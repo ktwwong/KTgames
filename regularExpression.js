@@ -7,21 +7,61 @@
  */
 
 module.exports = {
-    array:
-    [
-        [/^\/[a-zA-Z0-9\/-/]*.js$/, "text/javascript"],
-        [/^\/[a-zA-Z0-9\/-/]*.bundle.min.js$/, "text/javascript"],
-        [/^\/[a-zA-Z0-9\/-/]*.css$/, "text/css"],
-        [/^\/[a-zA-Z0-9\/-]*.min.css$/, "text/css"],
-        [/^\/[a-zA-Z0-9\/-/]*.jpg$/, "image/jpg"],
-        [/^\/[a-zA-Z0-9-._\/]*.min.js$/, "text/javascript"],
-        [/^\/[a-zA-Z0-9-]*.min.css.map$/, "text/map"],
-        [/^\/[a-zA-Z0-9\/-/]*.min.js.map$/, "text/map"],
-        [/^\/[a-zA-Z0-9\/-/]*.css.map$/, "text/map"],
-        [/^\/[a-zA-Z0-9\/-/]*.png$/, "image/png"],
-        [/^\/[a-zA-Z0-9\/-/]*.ico$/, "text/ico"],
-        [/^\/[a-zA-Z0-9\/-/?]*.ttf$/, "text/font"],
-        [/^\/[a-zA-Z0-9\/-/?]*.woff$/, "text/woff"],
-        [/^\/[a-zA-Z0-9\/-/?]*.woff2$/, "text/woff2"],
-    ]
+    fileType:
+        ["js", "css", "jpg", "png", "map", "ttf", "ico", "woff", "woff2"]
+    ,
+
+    check: function(file) {
+        for(let i=0; i<this.fileType.length; i++){
+            if(file.includes(this.fileType[i])){
+                return this.fileType[i];
+            }
+        }
+        return null;
+    },
+
+    js:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.js$/,
+        fileType: "text/javascript"
+    },
+
+    css:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.css$/,
+        fileType: "text/css"
+    },
+
+    jpg:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.jpg$/,
+        fileType: "image/jpg"
+    },
+
+    png:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.png$/,
+        fileType: "image/png"
+    },
+
+    map:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.map$/,
+        fileType: "text/map"
+    },
+
+    ttf:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.ttf$/,
+        fileType: "text/font"
+    },
+
+    ico:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.ico$/,
+        fileType: "text/ico"
+    },
+    
+    woff:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.woff$/,
+        fileType: "text/woff"
+    },
+
+    woff2:{
+        regEx: /^\/[a-zA-Z0-9\/\-\.]*.woff2$/,
+        fileType: "text/woff2"
+    },
 };
