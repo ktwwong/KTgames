@@ -21,9 +21,10 @@ Or, if you want to listen to the author demonstration, there come the youtube pr
 
 https://youtu.be/WBGfqgVyMrw
 
-Last, there is the preview of the website:
+Hey everyone, I have reviewed the code after a year, I change a lot but now the website finally been deployed.
+If you want to take a look, there come the link(Thanks for Herokuapp let me have free hosting server):
 
-https://ktwwong.github.io/KTgames/
+https://ktgames.herokuapp.com 
 
 APIs call/input/output
 ===
