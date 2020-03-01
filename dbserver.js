@@ -105,7 +105,8 @@ function createServer() {
             }
             else if (req.url === "/") {
                 // redirect to main page
-                res.location('/Main');
+                res.writeHead(301, {Location: '/Main'});
+                res.end();
             }
             else if(regex.check(req.url) != null){
                 regularCheck(regex.file[regex.check(req.url)], res, req.url);
