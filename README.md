@@ -21,8 +21,7 @@ Or, if you want to listen to the author demonstration, there come the youtube pr
 
 https://youtu.be/WBGfqgVyMrw
 
-Hey everyone, I have reviewed the code after a year, I change a lot but now the website finally been deployed.
-If you want to take a look, there come the link(Thanks for Herokuapp let me have free hosting server):
+Hey everyone, I have reviewed the code after a year, I change a lot andnow the website finally been deployed. If you want to take a look, there come the link(Thanks for Herokuapp let me have the free hosting server):
 
 https://ktgames.herokuapp.com 
 
