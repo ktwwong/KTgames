@@ -7,81 +7,64 @@
  */
 
 module.exports = {
-    fileType: 
-        ["js", "css", "jpg", "png", "map", "ttf", "ico", "woff", "woff2"]
-    ,
+    getFile: function() {
+        return Object.keys(this.file);
+    },
 
     check: function(file) {
-        for(let i=0; i<this.fileType.length; i++){
-            if(file.includes(this.fileType[i])){
-                return this.fileType[i];
+        var fileType = this.getFile();
+        for(let i=0; i<fileType.length; i++){
+            if(file.endsWith(fileType[i])){
+                return fileType[i];
             }
         }
         return null;
     },
 
-    js:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.js$/,
-        fileType: "text/javascript"
-    },
+    file: {
+        js:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.js$/,
+            fileType: "text/javascript"
+        },
 
-    css:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.css$/,
-        fileType: "text/css"
-    },
+        css:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.css$/,
+            fileType: "text/css"
+        },
 
-    jpg:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.jpg$/,
-        fileType: "image/jpg"
-    },
+        jpg:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.jpg$/,
+            fileType: "image/jpg"
+        },
 
-    png:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.png$/,
-        fileType: "image/png"
-    },
+        png:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.png$/,
+            fileType: "image/png"
+        },
 
-    map:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.map$/,
-        fileType: "text/map"
-    },
+        map:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.map$/,
+            fileType: "text/map"
+        },
 
-    ttf:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.ttf$/,
-        fileType: "text/font"
-    },
+        ttf:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.ttf$/,
+            fileType: "text/font"
+        },
 
-    ico:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.ico$/,
-        fileType: "text/ico"
-    },
-    
-    woff:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.woff$/,
-        fileType: "text/woff"
-    },
+        ico:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.ico$/,
+            fileType: "text/ico"
+        },
+        
+        woff:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.woff$/,
+            fileType: "text/woff"
+        },
 
-    woff2:{
-        regEx: /^\/[a-zA-Z0-9\/\-\.]*.woff2$/,
-        fileType: "text/woff2"
-    },
+        woff2:{
+            regEx: /^\/[a-zA-Z0-9\/\-\.]*.woff2$/,
+            fileType: "text/woff2"
+        },
+    }
 };
-// font is loading extremely low, direct call to avoid time-out
-            // else if(/^\/[a-zA-Z0-9\/\-\.]*.tff$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/font");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.woff$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/woff");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.woff2$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/woff2");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.map$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/map");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.css$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/css");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.js$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/javascript");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.ico$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "text/ico");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.png$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "image/png");
-			// }else if(/^\/[a-zA-Z0-9\/\-\.]*.jpg$/.test(req.url)){
-			// 	sendFileContent(res, req.url.substring(1), "image/jpg");
-            // }

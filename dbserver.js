@@ -111,9 +111,10 @@ function createServer() {
                 res.write("<b>testpage</b><br /><br />This is the default response.");
             }
             else if(regex.check(req.url) != null){
-                regularCheck(regex[regex.check(req.url)], res, req.url);
+                regularCheck(regex.file[regex.check(req.url)], res, req.url);
             }
             else {
+                console.log(regex.getFile());
                 console.log("Requested URL is: " + req.url);
                 res.end();
             }
