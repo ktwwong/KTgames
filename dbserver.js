@@ -104,11 +104,8 @@ function createServer() {
                 sendFileContent(res, "finalindex.html", "text/html");
             }
             else if (req.url === "/") {
-                console.log("Requested URL is url" + req.url);
-                res.writeHead(200, {
-                    "Content-Type": "text/html"
-                });
-                res.write("<b>testpage</b><br /><br />This is the default response.");
+                // redirect to main page
+                res.location('/Main');
             }
             else if(regex.check(req.url) != null){
                 regularCheck(regex.file[regex.check(req.url)], res, req.url);
