@@ -19,7 +19,7 @@ https://github.com/ktwwong/KTgames
 
 Or, if you want to listen to the author demonstration, there come the youtube presentation link:
 
-https://youtu.be/WBGfqgVyMrw
+(link removed)
 
 Hey everyone, I have reviewed the code after a year, I change a lot andnow the website finally been deployed. If you want to take a look, there come the link(Thanks for Herokuapp let me have the free hosting server):
 
