@@ -55,6 +55,10 @@ var route = {
         method: "",
         html: "post.html"
     },
+    "contact" : {
+        method: "",
+        html: "contact.html"
+    },
     // "API" : {
     //     method: "",
     //     html: "apiCall.html"
