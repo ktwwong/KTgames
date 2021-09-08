@@ -55,10 +55,10 @@ var route = {
         method: "",
         html: "post.html"
     },
-    "API" : {
-        method: "",
-        html: "apiCall.html"
-    },
+    // "API" : {
+    //     method: "",
+    //     html: "apiCall.html"
+    // },
 };
 
 function createServer() {
